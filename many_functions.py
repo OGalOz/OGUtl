@@ -23,6 +23,9 @@ def split_file(inp_file, op_dir, max_size=20*(2**20),
                               to keep the file correct, it needs to have
                               the 4 lines in a row.
     '''
+    
+    check_split_file_inputs(inp_file, op_dir, max_num_files, nLineGroup)
+
     # Checking file name:
     split_fn = os.path.basename(inp_file).split(".")
     file_base, file_ext = split_fn[0:-1], split_fn[-1]
@@ -97,12 +100,22 @@ def split_file(inp_file, op_dir, max_size=20*(2**20),
 
     return None 
 
-def check_split_file_inputs(max_num_files):
+def check_split_file_inputs(inp_file, op_dir 
+                            max_num_files, nLineGroup):
+    if not os.path.exists(inp_file):
+        raise Exception(f"Input file at {inp_file} does not exist.")
+    if not os.path.isdir(op_dir):
+        raise Exception(f"Output dir at {op_dir} does not exist.")
     if max_num_files is not None:
         if not isinstance(max_num_files, int):
             raise Exception("max_num_files must be an int")
         elif max_num_files < 1:
             raise Exception("max_num_files must be 1 or greater.")
+    if not isinstance(nLineGroup, int):
+        raise Exception("nLineGroup must be an int")
+    else:
+        if nLineGroup < 1:
+            raise Exception("nLineGroup must be 1 or greater.")
 
 
     return None
