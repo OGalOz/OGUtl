@@ -100,6 +100,14 @@ def split_file(inp_file, op_dir, max_size=20*(2**20),
 
     return None 
 
+
+def check_if_dir_empty(dir_path):
+    x = os.listdir(dir_path)
+    if len(x) == 0:
+        return True
+    else:
+        return False
+
 def check_split_file_inputs(inp_file, op_dir 
                             max_num_files, nLineGroup):
     if not os.path.exists(inp_file):
@@ -131,6 +139,8 @@ def force_create_dir(op_dir):
         shutil.rmtree(op_dir, ignore_errors=True)
     os.mkdir(op_dir)
 
+def stop(inp):
+    raise Exception(str(inp))
 
 def get_help_str():
     return "incomplete."
