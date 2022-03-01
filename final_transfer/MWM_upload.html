@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ENIGMA Upload File to MWM</title>
+    <!--<script src="table_data.js"></script> --!>
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 125px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <b>Upload File to replace MWM</b>
+    <div id="upload_new_mwm" style="height: 100px;" class="qur_forms">
+        <form action="/testingUploadMWM" id="upload_MWM_file" 
+            method="post" enctype="multipart/form-data">
+            <input type="file" name="MWM_file" />
+            <p></p>
+            Type: <input type="text" name="file_type" maxlength="64" 
+                        autocomplete="off" list="ft_opt">
+                        <datalist id="ft_opt">
+                    <option value="CSV">
+                            <option value="TSV">
+                        </datalist>
+            <p></p>
+            <input type="submit">
+        </form>
+
+    </div>
+    <br/><br/>
+    <h2>Insertion Restrictions:</h2>
+    <p><b>File Type</b>: Should be Unix Standard CSV or TSV,  new line '\n', first line should be headers since upload ignores first line.</p>
+    <p>Note that Excel sometimes exports CSVs/TSVs with the first character being '\ufeff' - this should not be in the file.</p>
+    <p><b>ASV</b>: as usual, max characters is 128</p>
+    <p><b>Reason</b>: Max characters is 256. For safety use underscores</p>
+    <p><b>Analysis_Date</b>: Should look like '20221011', ie YYYYMMDD.</p>
+    <p><b>Person</b>: Max characters is 128, e.g. 'AA'.</p>
+    <p>No spaces, semi colons, quotations, escape chars, etc.</p>
+    <br>
+    <br>
+</body>
+</html>
+
+
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Query landing page</title>
+    <!--<script src="table_data.js"></script> --!>
+
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 100px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+
+    <script src="testingjavascripts/Tries/sample_name_trie.js"></script>
+    <script src="testingjavascripts/Tries/TrieFuncs.js"></script>
+    <script src="testingjavascripts/Tries/sample_lc_to_all.js"></script>
+    <script>
+    function acf(inp_id) {
+        let input_el = document.getElementById(inp_id);
+        let prefix_str = input_el.value.toLowerCase()
+        if (prefix_str != "") {
+            // Below functions both from TrieFuncs
+            // SampleRT variable from file sample_name_trie.js
+            let lc_word_list = get_all_words_start_with(SampleRT, prefix_str); 
+            let word_list = get_uppered_sample_list(lc_word_list); 
+            let option_list = create_Option_list(word_list);
+            let data_list = input_el.list;
+            updateDataList(data_list, option_list);
+        }
+    }
+
+    function get_uppered_sample_list(word_list, max_num=10) {
+        // variable sample_lc_to_all imported from javascript file 'sample_lc_to_all.js'
+        let n = Math.min(word_list.length, max_num)
+        let wl = [];
+        for (i=0; i < n; i++) {
+            wl.push(sample_lc_to_all[word_list[i]][0])
+        }
+        return wl
+    }
+
+
+
+        /*
+        function validateForm(typ) {
+       if (typ == 1) {
+
+       }
+        }
+
+        function validate(form_id) {
+            // form_id is the string id of the form
+            let crt_form = document.getElementById(form_id)
+
+            for (i=0; i < myform.childElementCount; i++) {
+                crt_elem = myform.children[i]
+                console.log(crt_elem.tagName)
+                if (crt_elem.tagName == "INPUT") {
+                }
+            }
+
+
+
+            fields = [];
+            if (document.form.price.value.trim() === "") {
+                alert("Please enter a price");
+                document.form.price.focus();
+                return false;
+            }
+            if (document.form.price.value !== "") {
+                if (! (/^\d*(?:\.\d{0,2})?$/.test(document.form.price.value))) {
+                    alert("Please enter a valid price");
+                    document.form.price.focus();
+                    return false;
+            }
+            }
+            return true;
+            }
+
+
+
+       */
+    </script>
+</head>
+<body>
+    <b>Get Sequence from ASV</b>
+    <div id="asv2sequence_form" class="qur_forms">
+        <form action="/testingasv2seq" id="asv2seq" method="get">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Get Sequences from ASVs (Limit is 100 ASVs)</b>
+    <div id="asvs2sequences_form" class="qur_forms">
+        <form action="/testingasvs2seqs" id="asvs2seqs" method="get">
+            ASVs: <input type="text" name="ASV_names" maxlength="100000">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+
+    <b>Search by ASV & Sample</b>
+    <div id="single_value_form" class="qur_forms">
+        <form action="/testingsingle_value" id="sv_form" method="get" autocomplete="off">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
+            <p></p>
+            Sample: <input type="text" name="Sample_name" maxlength="64" id="sample_search_inp1"
+            list="sampleSuggestions1" oninput="acf(this.id)">
+            <datalist id="sampleSuggestions1"></datalist>
+            <p></p>
+            <input type="submit"  
+             title="No quotations, quotes, backticks, spaces or semi-colons.">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Search by ASV</b>
+    <div id="sample_values_form" class="qur_forms">
+        <form action="/testingsample_values" id="asv2samples" method="get" autocomplete="off">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Search by Sample</b>
+    <div id="asv_values_form" class="qur_forms">
+        <form action="/testingasv_values" id="samples2asv" method="get" autocomplete="off">
+            Sample: <input type="text" name="Sample_name" maxlength="64" id="sample_search_inp2"
+            list="sampleSuggestions2" oninput="acf(this.id)">
+            <datalist id="sampleSuggestions2"></datalist>
+            <p></p>
+            <input type="submit" >
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+</body>
+</html>
+
+
+

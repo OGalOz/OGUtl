@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Campaign Search landing page</title>
+    <!--<script src="table_data.js"></script> --!>
+
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 100px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+
+    <script src="testingjavascripts/Tries/sample_name_trie.js"></script>
+    <script src="testingjavascripts/Tries/TrieFuncs.js"></script>
+    <script src="testingjavascripts/Tries/sample_lc_to_all.js"></script>
+    <script>
+    function acf(inp_id) {
+        let input_el = document.getElementById(inp_id);
+        let prefix_str = input_el.value.toLowerCase()
+        if (prefix_str != "") {
+            // Below functions both from TrieFuncs
+            // SampleRT variable from file sample_name_trie.js
+            let lc_word_list = get_all_words_start_with(SampleRT, prefix_str); 
+            let word_list = get_uppered_sample_list(lc_word_list); 
+            let option_list = create_Option_list(word_list);
+            let data_list = input_el.list;
+            updateDataList(data_list, option_list);
+        }
+    }
+
+    function get_uppered_sample_list(word_list, max_num=10) {
+        // variable sample_lc_to_all imported from javascript file 'sample_lc_to_all.js'
+        let n = Math.min(word_list.length, max_num)
+        let wl = [];
+        for (i=0; i < n; i++) {
+            wl.push(sample_lc_to_all[word_list[i]][0])
+        }
+        return wl
+    }
+
+    </script>
+</head>
+<body>
+    <b>Get Samples From Campaign</b>
+    <div id="campaign2sample" class="qur_forms">
+        <form action="/testingcampaign2sample" id="campaign2sample_f" method="get">
+            Campaign: <input type="text" name="campaign_name" maxlength="64" 
+                        autocomplete="off" list="campaign_options">
+                        <datalist id="campaign_options">
+                            <option value="100 Well Survey">
+                            <option value="27 Well Survey">
+                            <option value="Spring 2019 Survey">
+                            <option value="2017 Pilot - Activity Data">
+                            <option value="CPT">
+                            <option value="2017 Pilot - Sediment">
+                        </datalist>
+
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Get All Data From Campaign</b>
+    <div id="campaign2data" class="qur_forms">
+        <form action="/testingcampaign2data" id="campaign2data_f" method="get">
+            Campaign: <input type="text" name="campaign_name" maxlength="64" 
+                        autocomplete="off" list="campaign_options">
+                        <datalist id="campaign_options">
+                            <option value="100 Well Survey">
+                            <option value="27 Well Survey">
+                            <option value="Spring 2019 Survey">
+                            <option value="2017 Pilot - Activity Data">
+                            <option value="CPT">
+                            <option value="2017 Pilot - Sediment">
+                        </datalist>
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Search by Campaign and ASV</b>
+    <div id="campaign_and_asv" class="qur_forms">
+        <form action="/testingcampaign_and_asv" id="campaign_and_asv_f" method="get">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
+            <p></p>
+            Campaign: <input type="text" name="campaign_name" maxlength="64" 
+                        autocomplete="off" list="campaign_options">
+                        <datalist id="campaign_options">
+                            <option value="100 Well Survey">
+                            <option value="27 Well Survey">
+                            <option value="Spring 2019 Survey">
+                            <option value="2017 Pilot - Activity Data">
+                            <option value="CPT">
+                            <option value="2017 Pilot - Sediment">
+                        </datalist>
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Get Campaign from Sample Name</b>
+    <div id="sample2campaign" class="qur_forms">
+        <form action="/testingsample2campaign" id="sample2campaign_f" method="get">
+            Sample: <input type="text" name="Sample_name" maxlength="64" id="sample_search_inp_3"
+            list="sampleSuggestions3" oninput="acf(this.id)">
+            <datalist id="sampleSuggestions3"></datalist>
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+</body>
+</html>
+
+
+

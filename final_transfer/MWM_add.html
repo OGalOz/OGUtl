@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ENIGMA Add to MWM</title>
+    <!--<script src="table_data.js"></script> --!>
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 125px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <b>Add to MWM</b>
+    <div id="add_to_mwm_form" style="height: 300px;" class="qur_forms">
+        <form action="/testingAddToMWM" id="srch_by_taxonomy" 
+            method="post" autocomplete="off">
+            ASV: <input type="text" name="asv" maxlength="128" id="asv_inp">
+            <br/><br/>
+            Reason: <input type="text" name="reason" maxlength="256" id="reason_inp">
+            <br/><br/>
+            Date: <input type="text" name="date" maxlength="8" id="date_inp">
+            <br/><br/>
+            Person: <input type="text" name="person" maxlength="128" id="person_inp">
+            <br/><br/>
+            <input type="submit">
+        </form>
+    </div>
+    <br/><br/>
+    <h2>Insertion Restrictions:</h2>
+    <p><b>ASV</b>: as usual, max characters is 128</p>
+    <p><b>Reason</b>: Max characters is 256. For safety use underscores</p>
+    <p><b>Date</b>: Should look like '20221011', ie YYYYMMDD.</p>
+    <p><b>Person</b>: Max characters is 128, e.g. 'AA'.</p>
+    <p>No spaces, commas, semi colons, quotations, escape chars, etc.</p>
+    <br>
+    <br>
+</body>
+</html>
+
+
+
